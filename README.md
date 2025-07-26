@@ -5,7 +5,7 @@ Martin from Cloudflare Tunnel with multiple PMTiles support
 x-24b is a generalized version of [gel-tunnel](https://github.com/optgeo/gel-tunnel), designed to host multiple PMTiles in a data directory. It simplifies the process of downloading, verifying, and hosting PMTiles files.
 
 ## Why the name x-24b?
-The name "x-24b" is a playful nod to the Martin tile server and its connection to Cloudflare. Just like the experimental X-24B aircraft, which was produced by Martin and used flares during landing, this project "lands" PMTiles with the help of Martin and Cloudflare. In aviation, a "flare" is a small nose-up operation performed just before landing to ensure a smooth touchdown. Similarly, this project ensures a smooth and efficient "landing" of PMTiles into your data directory. While we don't have actual flares, we do have blazing-fast tile hosting and a touch of humor to keep things grounded! For more about the X-24B aircraft, visit [this reference](https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195762/martin-x-24b/).
+The name "x-24b" is a playful nod to the Martin tile server and its connection to Cloudflare. Just like the experimental X-24B aircraft, which was produced by Martin and used flares during landing, this project "lands" PMTiles with the help of Martin and Cloudflare. In aviation, a "flare" is a small nose-up operation performed just before landing to ensure a smooth touchdown. Similarly, this project ensures a smooth and efficient "landing" of PMTiles into your data directory. While we don't have actual flares, we do have blazing-fast tile hosting and a touch of humor to keep things grounded! For more about the X-24B aircraft, visit [this reference](https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195762/martin-x-24b/) and [this NASA image article](https://www.nasa.gov/image-article/x-24b-lifting-body/).
 
 ## Features
 - Hosts multiple PMTiles files listed in `urls.txt`.
@@ -29,3 +29,4 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 ## Notes
 - Ensure the repository remains clean.
 - Regularly update `README.md` and `NOTES.md` to reflect changes.
+- See [SERVICES.md](SERVICES.md) for services by x-24b.
