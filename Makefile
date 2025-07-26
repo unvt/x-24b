@@ -5,6 +5,7 @@ data_dir := data
 urls_file := urls.txt
 sprite_dir := sprite
 font_dir := font
+tunnel_name := gel-tunnel
 
 # Targets
 download:
@@ -30,15 +31,15 @@ clean:
 host:
 	@echo "Hosting PMTiles files with Martin..."
 	@if [ -d $(font_dir) ] && [ "$(shell ls -A $(font_dir))" ]; then \
-		martin $(data_dir) --sprite $(sprite_dir) --font $(font_dir); \
+		martin $(data_dir) --sprite $(sprite_dir) --font $(font_dir) --webui enable-for-all; \
 	else \
 		echo "Warning: No font files found. Skipping font configuration."; \
-		martin $(data_dir) --sprite $(sprite_dir); \
+		martin $(data_dir) --sprite $(sprite_dir) --webui enable-for-all; \
 	fi
 
 # Tunnel setup
 tunnel:
 	@echo "Setting up Cloudflare Tunnel..."
-	@cloudflared tunnel --url http://localhost:8000
+	@cloudflared tunnel run $(tunnel_name)
 
 .PHONY: download verify clean host tunnel

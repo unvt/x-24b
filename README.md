@@ -29,4 +29,4 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 ## Notes
 - Ensure the repository remains clean.
 - Regularly update `README.md` and `NOTES.md` to reflect changes.
-- See [SERVICES.md](SERVICES.md) for services by x-24b.
+- The Cloudflare tunnel name is configurable via the `tunnel_name` variable in the `Makefile`.
