@@ -1,0 +1,16 @@
+# Ignore directories
+/data/
+/sprite/
+/font/
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files
+.vscode/
+.idea/

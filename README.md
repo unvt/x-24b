@@ -1,17 +1,31 @@
 # x-24b
 Martin from Cloudflare Tunnel with multiple PMTiles support
 
-# Development instructions
-- This is a generalized version of https://github.com/optgeo/gel-tunnel.
-- The basic structure is based on https://github.com/optgeo/gel-tunnel.
-- x-24b can host multiple PMTiles in data directory.
-- The list of PMTiles files are in list.csv
-  - First column is the name of the PMTiles file.
-  - Second column is the URL from which x-24b downloads them.
-  - abc,https://server/directory/xyz.pmtiles means that x-24b downloads https://server/directory/xyz.pmtiles and save it as data/abc.pmtiles.
-  - list.csv should be populated with gel.pmtiles.
-- All the process is controlled by Makefile.
-  - Makefile should have download, verify, clean, host, tunnel.
-- Keep the repository clean.
-- Create and update README.md and NOTES.md.
-- 
+## Overview
+x-24b is a generalized version of [gel-tunnel](https://github.com/optgeo/gel-tunnel), designed to host multiple PMTiles in a data directory. It simplifies the process of downloading, verifying, and hosting PMTiles files.
+
+## Why the name x-24b?
+The name "x-24b" is a playful nod to the Martin tile server and its connection to Cloudflare. Just like the experimental X-24B aircraft, which was produced by Martin and used flares during landing, this project "lands" PMTiles with the help of Martin and Cloudflare. In aviation, a "flare" is a small nose-up operation performed just before landing to ensure a smooth touchdown. Similarly, this project ensures a smooth and efficient "landing" of PMTiles into your data directory. While we don't have actual flares, we do have blazing-fast tile hosting and a touch of humor to keep things grounded! For more about the X-24B aircraft, visit [this reference](https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195762/martin-x-24b/).
+
+## Features
+- Hosts multiple PMTiles files listed in `urls.txt`.
+- Downloads PMTiles files using `aria2c` for batch processing.
+- Controlled entirely via a `Makefile` with the following commands:
+  - `download`: Fetch PMTiles files.
+  - `verify`: Validate downloaded PMTiles files using `pmtiles verify`.
+  - `clean`: Remove unnecessary files.
+  - `host`: Serve PMTiles files using Martin.
+  - `tunnel`: Establish a Cloudflare Tunnel.
+
+## Usage
+1. Populate `urls.txt` with PMTiles file details:
+   - Example:
+     ```
+     https://server/directory/xyz.pmtiles
+         output=data/xyz.pmtiles
+     ```
+2. Use the `Makefile` to manage the process.
+
+## Notes
+- Ensure the repository remains clean.
+- Regularly update `README.md` and `NOTES.md` to reflect changes.

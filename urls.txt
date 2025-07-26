@@ -1,0 +1,8 @@
+https://data.source.coop/smartmaps/gel/gel.pmtiles
+    out=data/gel.pmtiles.part
+https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles
+    out=data/bvmap.pmtiles.part
+https://tile.openstreetmap.jp/static/planet.pmtiles
+    out=data/planet.pmtiles.part
+https://cndg-dgot.github.io/experimental-dili-beta/a.pmtiles
+    out=data/experimental-dili-beta.pmtiles.part
