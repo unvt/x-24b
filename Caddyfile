@@ -1,0 +1,40 @@
+:8080 {
+    # Serve static files from the data folder
+    root * ./data
+    file_server
+
+    # Enable debug logging
+    log {
+        output stdout
+        level DEBUG
+    }
+
+    # Add CORS headers to all responses
+    header Access-Control-Allow-Origin "*"
+    header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    header Access-Control-Allow-Headers "*"
+
+    # Reverse-proxy requests to martin
+    handle_path /martin/* {
+        # Handle OPTIONS preflight requests for martin paths
+        @martin_preflight method OPTIONS
+        handle @martin_preflight {
+            header Access-Control-Allow-Origin "*"
+            header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+            header Access-Control-Allow-Headers "*"
+            header Access-Control-Max-Age "86400"
+            respond 204
+        }
+        
+        uri strip_prefix /martin
+        reverse_proxy localhost:3000 {
+            # 強制的にHTTPSのURL構造を設定
+            header_up X-Rewrite-URL "https://tunnel.optgeo.org/martin{http.request.uri}"
+            # 追加の保険用ヘッダー
+            header_up X-Forwarded-Proto "https"
+            header_up X-Forwarded-Host "tunnel.optgeo.org"
+            header_up X-Forwarded-Port "443"
+            header_up X-Scheme "https"
+        }
+    }
+}

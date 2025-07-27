@@ -11,7 +11,7 @@ tunnel_name := gel-tunnel
 download:
 	@echo "Downloading PMTiles files as .part..."
 	@mkdir -p $(data_dir)
-	@aria2c --conditional-get=true -i $(urls_file)
+	@aria2c --conditional-get=true --max-download-limit=1048576 -i $(urls_file)
 
 verify:
 	@echo "Verifying PMTiles files..."
@@ -28,18 +28,16 @@ clean:
 	@echo "Cleaning up..."
 	@rm -rf $(data_dir)
 
-host:
-	@echo "Hosting PMTiles files with Martin..."
-	@if [ -d $(font_dir) ] && [ "$(shell ls -A $(font_dir))" ]; then \
-		martin $(data_dir) --sprite $(sprite_dir) --font $(font_dir) --webui enable-for-all; \
-	else \
-		echo "Warning: No font files found. Skipping font configuration."; \
-		martin $(data_dir) --sprite $(sprite_dir) --webui enable-for-all; \
-	fi
+martin:
+	RUST_LOG=debug martin --config martin.yml
+
+caddy:
+	@echo "Starting Caddy server..."
+	@caddy run --config Caddyfile
 
 # Tunnel setup
 tunnel:
 	@echo "Setting up Cloudflare Tunnel..."
 	@cloudflared tunnel run $(tunnel_name)
 
-.PHONY: download verify clean host tunnel
+.PHONY: download verify clean martin tunnel caddy

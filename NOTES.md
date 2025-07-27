@@ -1,18 +1,75 @@
-# NOTES
+# NOTES / 開発ノート
 
-## Overview
-This document contains supplementary notes for the x-24b project.
+## Overview / 概要
+This document contains supplementary notes for the x-24b project, including development insights and configuration details.
 
-## Key Points
-- **PMTiles Hosting**: Managed by Martin, which dynamically serves tiles, sprites, and fonts.
-- **Makefile Tasks**:
-  - `download`: Fetch PMTiles files listed in `urls.txt` using `aria2c`. Files are downloaded with a `.part` extension.
-  - `verify`: Validate the presence and integrity of PMTiles files using `pmtiles verify`. Valid files are renamed to remove the `.part` extension.
-  - `clean`: Remove all files in the `data` directory.
-  - `host`: Use Martin to serve PMTiles files along with sprites and fonts. Partially downloaded files are excluded.
-  - `tunnel`: Set up a Cloudflare Tunnel.
+このドキュメントには、開発の洞察と設定の詳細を含む、x-24bプロジェクトの補足ノートが含まれています。
 
-## Notes
-- Ensure `urls.txt` is properly formatted before running `make download`.
-- Martin does not require explicit directory creation for hosting tasks.
-- Update this document as the project evolves.
+## Key Points / 主要なポイント
+
+### PMTiles Hosting / PMTilesホスティング
+- **Managed by Martin** - Dynamically serves tiles, sprites, and fonts
+- **Martinによる管理** - タイル、スプライト、フォントを動的に配信
+- **CORS Configuration** - Handled exclusively by Caddy to prevent header conflicts
+- **CORS設定** - ヘッダー競合を防ぐためCaddyでのみ処理
+- **URL Generation** - Uses X-Rewrite-URL header for consistent HTTPS URLs
+- **URL生成** - 一貫したHTTPS URLのためX-Rewrite-URLヘッダーを使用
+
+### Makefile Tasks / Makefileタスク
+
+**`make download`** - Fetch PMTiles files / PMTilesファイルを取得
+- Uses `aria2c` for efficient batch downloading
+- 効率的なバッチダウンロードのため`aria2c`を使用
+- Files downloaded with `.part` extension during transfer
+- 転送中は`.part`拡張子でファイルをダウンロード
+
+**`make verify`** - Validate PMTiles integrity / PMTiles整合性を検証
+- Uses `pmtiles verify` to check file validity
+- ファイルの有効性確認のため`pmtiles verify`を使用
+- Valid files renamed to remove `.part` extension
+- 有効なファイルは`.part`拡張子を削除してリネーム
+
+**`make clean`** - Remove all data files / すべてのデータファイルを削除
+- Clears entire `data` directory
+- `data`ディレクトリ全体をクリア
+
+**`make host`** - Start Martin server / Martinサーバーを開始
+- Serves PMTiles files along with sprites and fonts
+- スプライトとフォントと共にPMTilesファイルを配信
+- Excludes partially downloaded files (`.part` files)
+- 部分的にダウンロードされたファイル（`.part`ファイル）を除外
+
+**`make tunnel`** - Establish Cloudflare Tunnel / Cloudflare Tunnelを確立
+- Configurable tunnel name via `tunnel_name` variable
+- `tunnel_name`変数による設定可能なトンネル名
+
+## Technical Notes / 技術ノート
+
+### CORS Implementation / CORS実装
+- **Problem**: Duplicate CORS headers when both Martin and Caddy add them
+- **問題**: MartinとCaddyの両方がCORSヘッダーを追加すると重複が発生
+- **Solution**: Set `cors: false` in martin.yml, handle CORS only in Caddy
+- **解決策**: martin.ymlで`cors: false`を設定、CaddyでのみCORSを処理
+
+### URL Consistency / URL一貫性
+- **Challenge**: Different URL schemes (http vs https) in TileJSON responses
+- **課題**: TileJSONレスポンスでの異なるURLスキーム（http vs https）
+- **Solution**: X-Rewrite-URL header provides complete external URL structure
+- **解決策**: X-Rewrite-URLヘッダーが完全な外部URL構造を提供
+
+### Path Handling / パス処理
+- **Caddy strips** `/martin` prefix before forwarding to Martin
+- **Caddyが除去** 転送前にMartinへ`/martin`プレフィックスを除去
+- **Martin serves** files directly without path prefix complications
+- **Martinが配信** パスプレフィックスの複雑さなしにファイルを直接配信
+
+## Development Guidelines / 開発ガイドライン
+
+- **Repository cleanliness** - Ensure the repository remains clean
+- **リポジトリの清潔さ** - リポジトリを清潔に保つ
+- **urls.txt formatting** - Ensure proper formatting before running `make download`
+- **urls.txt形式** - `make download`実行前に適切な形式を確認
+- **Documentation updates** - Update this document as the project evolves
+- **ドキュメント更新** - プロジェクトの発展に合わせてこのドキュメントを更新
+- **Configuration testing** - Always test configuration changes with both localhost and tunnel access
+- **設定テスト** - 設定変更は常にlocalhostとtunnelアクセスの両方でテスト

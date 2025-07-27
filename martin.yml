@@ -1,0 +1,7 @@
+pmtiles: 
+  paths: 
+    - data/experimental-dili-beta.pmtiles
+    - data/bvmap.pmtiles
+web_ui: enable-for-all
+base_url: "https://tunnel.optgeo.org/martin"
+cors: false
