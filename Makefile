@@ -40,4 +40,9 @@ tunnel:
 	@echo "Setting up Cloudflare Tunnel..."
 	@cloudflared tunnel run $(tunnel_name)
 
-.PHONY: download verify clean martin tunnel caddy
+services:
+	@echo "Generating SERVICES.md from martin.yml..."
+	@python3 scripts/generate_services_md.py --output SERVICES.md
+	@echo "SERVICES.md updated."
+
+.PHONY: download verify clean martin tunnel caddy services

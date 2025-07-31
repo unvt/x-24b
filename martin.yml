@@ -2,6 +2,8 @@ pmtiles:
   paths: 
     - data/experimental-dili-beta.pmtiles
     - data/bvmap.pmtiles
+    - data/planet.pmtiles
+#    - data/gel.pmtiles
 web_ui: enable-for-all
 base_url: "https://tunnel.optgeo.org/martin"
 cors: false

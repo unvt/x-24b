@@ -1,5 +1,13 @@
 # PMTiles Server Setup Documentation / PMTilesサーバーセットアップドキュメント
 
+> See also: [README.md](README.md) / [SERVICES.md](SERVICES.md) / [OPERATION.md](OPERATION.md) / [NOTES.md](NOTES.md)
+> 参照: [README.md](README.md) / [SERVICES.md](SERVICES.md) / [OPERATION.md](OPERATION.md) / [NOTES.md](NOTES.md)
+
+---
+
+> **Note:** All documentation uses English first, then Japanese for clarity and consistency.
+> **注:** すべてのドキュメントは英語→日本語の順で記載しています。
+
 ## Problem Statement / 問題の概要
 
 When serving PMTiles files through Martin behind a reverse proxy (Caddy) and accessed via a Cloudflare Tunnel, several critical issues emerged that prevented proper web map functionality:
@@ -267,3 +275,8 @@ curl -s https://tunnel.optgeo.org/martin/experimental-dili-beta | jq .tiles[0]
 - Path stripping in Caddy eliminated need for base_path in Martin
 
 This configuration ensures proper HTTPS URL generation in TileJSON responses for PMTiles served through a reverse proxy setup.
+
+---
+
+For more information, see [README.md](README.md), [OPERATION.md](OPERATION.md), [SERVICES.md](SERVICES.md), [NOTES.md](NOTES.md).
+詳細は [README.md](README.md)、[OPERATION.md](OPERATION.md)、[SERVICES.md](SERVICES.md)、[NOTES.md](NOTES.md) をご覧ください。

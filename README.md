@@ -40,6 +40,9 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 
 ## Usage / 使用方法
 
+> **Note:** All documentation uses English first, then Japanese for clarity and consistency.
+> **注:** すべてのドキュメントは英語→日本語の順で記載しています。
+
 1. **Populate `urls.txt`** with PMTiles file details:
    **`urls.txt`にPMTilesファイルの詳細を記入**:
    ```
@@ -50,10 +53,12 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 2. **Use the `Makefile`** to manage the process:
    **プロセス管理に`Makefile`を使用**:
    ```bash
-   make download  # Download files / ファイルをダウンロード
-   make verify    # Verify integrity / 整合性を検証  
-   make host      # Start Martin server / Martinサーバーを開始
-   make tunnel    # Start Cloudflare tunnel / Cloudflare tunnelを開始
+   make download   # Download files / ファイルをダウンロード
+   make verify     # Verify integrity / 整合性を検証
+   make martin     # Start Martin server / Martinサーバーを開始
+   make caddy      # Start Caddy server / Caddyサーバーを開始
+   make tunnel     # Start Cloudflare tunnel / Cloudflare tunnelを開始
+   make clean      # Remove unnecessary files / 不要なファイルを削除
    ```
 
 3. **Access your tiles** via the tunnel:
@@ -97,3 +102,16 @@ For detailed technical documentation, see [`SETUP.md`](SETUP.md).
 - [`SETUP.md`](SETUP.md) - Detailed technical setup and troubleshooting / 詳細な技術セットアップとトラブルシューティング
 - [`SERVICES.md`](SERVICES.md) - Available services and endpoints / 利用可能なサービスとエンドポイント
 - [`NOTES.md`](NOTES.md) - Development notes and changelog / 開発ノートと変更履歴
+- [`OPERATION.md`](OPERATION.md) - Basic operation procedure for x-24b / x-24bの基礎的な運用手順
+
+## Historical Note / 歴史的記録
+
+The x-24b system successfully operated for the first time on **2025-07-27**. This marks the beginning of its journey as a reliable and experimental web map server.
+
+x-24bシステムは、**2025年7月27日**に初めて正常に稼働しました。これは、信頼性の高い実験的なウェブ地図サーバーとしての旅の始まりを示しています。
+
+## Name Significance / 名前の意味
+
+The name "x-24b" not only refers to the Martin tile server and its connection to Cloudflare but may also stand for "experimental 24-hour business." This could symbolize the goal of achieving 24/7 stable operation as a portable web map server, potentially running on devices like the Raspberry Pi 4B.
+
+"x-24b"という名前は、MartinタイルサーバーとCloudflareとの接続を指すだけでなく、「experimental 24-hour business」の略でもあるかもしれません。これは、Raspberry Pi 4Bのようなデバイスで24時間365日安定稼働するポータブルなウェブ地図サーバーを目指すことを象徴している可能性があります。

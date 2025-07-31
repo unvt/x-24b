@@ -1,5 +1,13 @@
 # NOTES / 開発ノート
 
+> See also: [README.md](README.md) / [SETUP.md](SETUP.md) / [SERVICES.md](SERVICES.md) / [OPERATION.md](OPERATION.md)
+> 参照: [README.md](README.md) / [SETUP.md](SETUP.md) / [SERVICES.md](SERVICES.md) / [OPERATION.md](OPERATION.md)
+
+---
+
+> **Note:** All documentation uses English first, then Japanese for clarity and consistency.
+> **注:** すべてのドキュメントは英語→日本語の順で記載しています。
+
 ## Overview / 概要
 This document contains supplementary notes for the x-24b project, including development insights and configuration details.
 
@@ -73,3 +81,8 @@ This document contains supplementary notes for the x-24b project, including deve
 - **ドキュメント更新** - プロジェクトの発展に合わせてこのドキュメントを更新
 - **Configuration testing** - Always test configuration changes with both localhost and tunnel access
 - **設定テスト** - 設定変更は常にlocalhostとtunnelアクセスの両方でテスト
+
+---
+
+For more information, see [README.md](README.md), [SETUP.md](SETUP.md), [SERVICES.md](SERVICES.md), [OPERATION.md](OPERATION.md).
+詳細は [README.md](README.md)、[SETUP.md](SETUP.md)、[SERVICES.md](SERVICES.md)、[OPERATION.md](OPERATION.md) をご覧ください。

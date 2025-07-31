@@ -8,10 +8,6 @@
 > **Note:** All documentation uses English first, then Japanese for clarity and consistency.
 > **注:** すべてのドキュメントは英語→日本語の順で記載しています。
 
-x-24b provides blazing-fast hosting for PMTiles files with enterprise-grade reliability and full CORS support for web mapping applications.
-
-x-24bは、エンタープライズグレードの信頼性とWebマッピングアプリケーション向けの完全CORSサポートにより、PMTilesファイルの超高速ホスティングを提供します。
-
 ## Current Services / 現在のサービス
 
 ### Experimental Dili Beta / 実験的ディリベータ
@@ -98,7 +94,6 @@ x-24bは、エンタープライズグレードの信頼性とWebマッピング
 - Reliable for production use with enterprise-grade infrastructure
 - エンタープライズグレードのインフラで本番環境での使用に信頼性
 
----
+Enjoy seamless and efficient tile hosting with x-24b!  
+x-24bでシームレスで効率的なタイルホスティングをお楽しみください！
 
-For more information, see [README.md](README.md), [SETUP.md](SETUP.md), [OPERATION.md](OPERATION.md), [NOTES.md](NOTES.md).
-詳細は [README.md](README.md)、[SETUP.md](SETUP.md)、[OPERATION.md](OPERATION.md)、[NOTES.md](NOTES.md) をご覧ください。
