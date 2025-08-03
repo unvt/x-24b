@@ -1,0 +1,8 @@
+{
+  "tile_type": "webp",
+  "tile_compression": "none",
+  "bounds": [-180.0, -85.05112878, 180.0, 85.05112878],
+  "center": [0.0, 0.0, 2],
+  "minzoom": 2,
+  "maxzoom": 12
+}

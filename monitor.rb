@@ -1,12 +1,7 @@
 require 'time'
 
-def get_pid(process_name)
-  pid = `pgrep -f #{process_name}`.split("\n").first
-  if pid.nil? || pid.empty?
-    puts "Process #{process_name} not found."
-    return nil
-  end
-  pid.to_i
+def get_pids(process_name)
+  `pgrep -f #{process_name}`.split("\n").map(&:to_i)
 end
 
 def read_proc_stat(pid)
@@ -17,7 +12,7 @@ def read_proc_stat(pid)
     stime = data[14].to_i  # 15th field
     return utime, stime
   else
-    raise "Stat file for PID #{pid} not found."
+    return 0, 0
   end
 end
 
@@ -27,23 +22,43 @@ def read_proc_io(pid)
     rchar = File.readlines(io_path).find { |line| line.start_with?("rchar:") }
     return rchar.split(":")[1].strip.to_i
   else
-    raise "IO file for PID #{pid} not found."
+    return 0
   end
 end
 
-def monitor_processes(process_names, interval = 5)
-  pids = process_names.map { |name| [name, get_pid(name)] }.to_h
-  pids.each { |name, pid| puts "Process #{name} (PID: #{pid || 'not found'})" }
+def get_etimes(pid)
+  etimes = `ps -p #{pid} -o etimes=`.strip
+  etimes.empty? ? nil : etimes.to_i
+end
 
-  puts "Time\t\tProcess\t\tutime\tstime\trchar"
+def monitor_processes(process_names, interval = 5)
+  all_pids = {}
+  process_names.each do |name|
+    all_pids[name] = get_pids(name)
+    puts "Process #{name} (PIDs: #{all_pids[name].join(', ')})"
+  end
+
+
   loop do
     begin
-      pids.each do |name, pid|
-        next unless pid
-
-        utime, stime = read_proc_stat(pid)
-        rchar = read_proc_io(pid)
-        puts "#{Time.now.strftime('%H:%M:%S')}\t#{name}\t\t#{utime}\t#{stime}\t#{rchar}"
+    puts "Time\t\tProcess\t\tutime\tstime\trchar\tetimes(s)"
+      process_names.each do |name|
+        pids = get_pids(name)
+        next if pids.empty?
+        utime_sum = 0
+        stime_sum = 0
+        rchar_sum = 0
+        etimes_list = []
+        pids.each do |pid|
+          ut, st = read_proc_stat(pid)
+          utime_sum += ut
+          stime_sum += st
+          rchar_sum += read_proc_io(pid)
+          et = get_etimes(pid)
+          etimes_list << et if et
+        end
+        etimes_str = etimes_list.empty? ? "-" : "#{etimes_list.min}/#{etimes_list.max}"
+        puts "#{Time.now.strftime('%H:%M:%S')}\t#{sprintf('%-12s', name)}\t#{utime_sum}\t#{stime_sum}\t#{sprintf('%-12s', rchar_sum)}\t#{etimes_str}"
       end
       sleep(interval)
     rescue => e
@@ -54,4 +69,4 @@ def monitor_processes(process_names, interval = 5)
 end
 
 # 実行
-monitor_processes(["martin", "caddy", "cloudflared"], 5)
+monitor_processes(["martin", "caddy", "cloudflared"], 180)

@@ -1,31 +1,29 @@
-#!/usr/bin/env python3
-import yaml
-import os
-import sys
+#!/usr/bin/env ruby
+require 'yaml'
+require 'optparse'
+require 'pathname'
 
-martin_yml = os.path.join(os.path.dirname(__file__), '..', 'martin.yml')
-default_output_md = os.path.join(os.path.dirname(__file__), '..', 'SERVICES.md')
+martin_yml = Pathname.new(__dir__).join('..', 'martin.yml')
+default_output_md = Pathname.new(__dir__).join('..', 'SERVICES.md')
 
 output_md = default_output_md
-if '--output' in sys.argv:
-    idx = sys.argv.index('--output')
-    if idx + 1 < len(sys.argv):
-        output_md = os.path.join(os.path.dirname(__file__), '..', sys.argv[idx + 1])
+OptionParser.new do |opts|
+  opts.on('--output FILE', 'Output file') { |v| output_md = Pathname.new(__dir__).join('..', v) }
+end.parse!(ARGV)
 
-with open(martin_yml, 'r') as f:
-    config = yaml.safe_load(f)
-
-pmtiles = config.get('pmtiles', {})
-paths = pmtiles.get('paths', [])
+config = YAML.load_file(martin_yml)
+pmtiles = config['pmtiles'] || {}
+paths = pmtiles['paths'] || []
 
 service_names = {
-    'experimental-dili-beta': 'Experimental Dili Beta / 実験的ディリベータ',
-    'bvmap': 'BVMap / BVマップ',
-    'planet': 'Planet / プラネット',
-    'gel': 'Gel / ジェル',
+  'experimental-dili-beta' => 'Experimental Dili Beta / 実験的ディリベータ',
+  'bvmap' => 'BVMap / BVマップ',
+  'planet' => 'Planet / プラネット',
+  'gel' => 'Gel / ジェル',
 }
 
-header = '''# Services by x-24b / x-24b提供サービス
+header = <<~EOS
+# Services by x-24b / x-24b提供サービス
 
 > See also: [README.md](README.md) / [SETUP.md](SETUP.md) / [OPERATION.md](OPERATION.md) / [NOTES.md](NOTES.md)
 > 参照: [README.md](README.md) / [SETUP.md](SETUP.md) / [OPERATION.md](OPERATION.md) / [NOTES.md](NOTES.md)
@@ -36,27 +34,29 @@ header = '''# Services by x-24b / x-24b提供サービス
 > **注:** すべてのドキュメントは英語→日本語の順で記載しています。
 
 ## Current Services / 現在のサービス
-'''
+EOS
 
-service_block = '''### {name}
+service_block = <<~EOS
+### %{name}
 
 **TileJSON Endpoint / TileJSONエンドポイント:**  
-{tilejson_url}
-- Retrieve a TileJSON response describing the {name_en} PMTiles source
-- {name_en} PMTilesソースを記述するTileJSONレスポンスを取得
+%{tilejson_url}
+- Retrieve a TileJSON response describing the %{name_en} PMTiles source
+- %{name_en} PMTilesソースを記述するTileJSONレスポンスを取得
 
 **Tile Access / タイルアクセス:**  
-{tile_url}
-- Access individual map tiles for the {name_en} dataset
-- {name_en}データセット用の個々のマップタイルにアクセス
+%{tile_url}
+- Access individual map tiles for the %{name_en} dataset
+- %{name_en}データセット用の個々のマップタイルにアクセス
 
 **Features / 機能:**
 - ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
 - ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
 - ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
-'''
+EOS
 
-future_services = '''## Future Services / 今後のサービス
+future_services = <<~EOS
+## Future Services / 今後のサービス
 
 ### Gel / ジェル
 **TileJSON Endpoint / TileJSONエンドポイント:**  
@@ -68,9 +68,10 @@ https://tunnel.optgeo.org/martin/gel
 https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y}
 - Access individual map tiles for the Gel dataset
 - Gelデータセット用の個々のマップタイルにアクセス
-'''
+EOS
 
-footer = '''## Technical Specifications / 技術仕様
+footer = <<~EOS
+## Technical Specifications / 技術仕様
 
 **All services provide / すべてのサービスが提供:**
 - **CORS Headers** - `Access-Control-Allow-Origin: *` for cross-domain access
@@ -92,17 +93,19 @@ footer = '''## Technical Specifications / 技術仕様
 
 Enjoy seamless and efficient tile hosting with x-24b!  
 x-24bでシームレスで効率的なタイルホスティングをお楽しみください！
-'''
+EOS
 
-with open(output_md, 'w') as f:
-    f.write(header)
-    for path in paths:
-        basename = os.path.basename(path)
-        name_key = basename.replace('.pmtiles', '')
-        name = service_names.get(name_key, name_key)
-        name_en = name.split(' / ')[0] if ' / ' in name else name
-        tilejson_url = f'https://tunnel.optgeo.org/martin/{name_key}'
-        tile_url = f'https://tunnel.optgeo.org/martin/{name_key}/{{z}}/{{x}}/{{y}}'
-        f.write(service_block.format(name=name, name_en=name_en, tilejson_url=tilejson_url, tile_url=tile_url))
-    f.write(future_services)
-    f.write(footer)
+File.open(output_md, 'w') do |f|
+  f.write(header)
+  paths.each do |path|
+    basename = File.basename(path)
+    name_key = basename.sub(/\.pmtiles$/, '')
+    name = service_names[name_key] || name_key
+    name_en = name.include?(' / ') ? name.split(' / ').first : name
+    tilejson_url = "https://tunnel.optgeo.org/martin/#{name_key}"
+    tile_url = "https://tunnel.optgeo.org/martin/#{name_key}/{z}/{x}/{y}"
+    f.write(service_block % {name: name, name_en: name_en, tilejson_url: tilejson_url, tile_url: tile_url})
+  end
+  f.write(future_services)
+  f.write(footer)
+end

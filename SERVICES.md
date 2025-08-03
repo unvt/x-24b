@@ -8,38 +8,32 @@
 > **Note:** All documentation uses English first, then Japanese for clarity and consistency.
 > **注:** すべてのドキュメントは英語→日本語の順で記載しています。
 
-x-24b provides blazing-fast hosting for PMTiles files with enterprise-grade reliability and full CORS support for web mapping applications.
-
-x-24bは、エンタープライズグレードの信頼性とWebマッピングアプリケーション向けの完全CORSサポートにより、PMTilesファイルの超高速ホスティングを提供します。
-
 ## Current Services / 現在のサービス
-
 ### Experimental Dili Beta / 実験的ディリベータ
 
 **TileJSON Endpoint / TileJSONエンドポイント:**  
-[https://tunnel.optgeo.org/martin/experimental-dili-beta](https://tunnel.optgeo.org/martin/experimental-dili-beta)
-- Retrieve a TileJSON response describing available PMTiles sources, including metadata and tile access URLs
-- メタデータとタイルアクセスURLを含む、利用可能なPMTilesソースを記述するTileJSONレスポンスを取得
+https://tunnel.optgeo.org/martin/experimental-dili-beta
+- Retrieve a TileJSON response describing the Experimental Dili Beta PMTiles source
+- Experimental Dili Beta PMTilesソースを記述するTileJSONレスポンスを取得
 
 **Tile Access / タイルアクセス:**  
-[https://tunnel.optgeo.org/martin/experimental-dili-beta/{z}/{x}/{y}](https://tunnel.optgeo.org/martin/experimental-dili-beta/{z}/{x}/{y})
-- Access individual map tiles using the `{z}/{x}/{y}` format for zoom, x, and y coordinates
-- ズーム、x、y座標の`{z}/{x}/{y}`形式を使用して個々のマップタイルにアクセス
+https://tunnel.optgeo.org/martin/experimental-dili-beta/{z}/{x}/{y}
+- Access individual map tiles for the Experimental Dili Beta dataset
+- Experimental Dili Betaデータセット用の個々のマップタイルにアクセス
 
 **Features / 機能:**
 - ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
 - ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
 - ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
-
 ### BVMap / BVマップ
 
 **TileJSON Endpoint / TileJSONエンドポイント:**  
-[https://tunnel.optgeo.org/martin/bvmap](https://tunnel.optgeo.org/martin/bvmap)
+https://tunnel.optgeo.org/martin/bvmap
 - Retrieve a TileJSON response describing the BVMap PMTiles source
 - BVMap PMTilesソースを記述するTileJSONレスポンスを取得
 
 **Tile Access / タイルアクセス:**  
-[https://tunnel.optgeo.org/martin/bvmap/{z}/{x}/{y}](https://tunnel.optgeo.org/martin/bvmap/{z}/{x}/{y})
+https://tunnel.optgeo.org/martin/bvmap/{z}/{x}/{y}
 - Access individual map tiles for the BVMap dataset
 - BVMapデータセット用の個々のマップタイルにアクセス
 
@@ -47,16 +41,15 @@ x-24bは、エンタープライズグレードの信頼性とWebマッピング
 - ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
 - ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
 - ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
-
 ### Planet / プラネット
 
 **TileJSON Endpoint / TileJSONエンドポイント:**  
-[https://tunnel.optgeo.org/martin/planet](https://tunnel.optgeo.org/martin/planet)
+https://tunnel.optgeo.org/martin/planet
 - Retrieve a TileJSON response describing the Planet PMTiles source
 - Planet PMTilesソースを記述するTileJSONレスポンスを取得
 
 **Tile Access / タイルアクセス:**  
-[https://tunnel.optgeo.org/martin/planet/{z}/{x}/{y}](https://tunnel.optgeo.org/martin/planet/{z}/{x}/{y})
+https://tunnel.optgeo.org/martin/planet/{z}/{x}/{y}
 - Access individual map tiles for the Planet dataset
 - Planetデータセット用の個々のマップタイルにアクセス
 
@@ -64,20 +57,34 @@ x-24bは、エンタープライズグレードの信頼性とWebマッピング
 - ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
 - ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
 - ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
-
-## Future Services / 今後のサービス
-
 ### Gel / ジェル
+
 **TileJSON Endpoint / TileJSONエンドポイント:**  
-[https://tunnel.optgeo.org/martin/gel](https://tunnel.optgeo.org/martin/gel)
+https://tunnel.optgeo.org/martin/gel
 - Retrieve a TileJSON response describing the Gel PMTiles source
 - Gel PMTilesソースを記述するTileJSONレスポンスを取得
 
 **Tile Access / タイルアクセス:**  
-[https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y}](https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y})
+https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y}
 - Access individual map tiles for the Gel dataset
 - Gelデータセット用の個々のマップタイルにアクセス
 
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+## Future Services / 今後のサービス
+
+### Gel / ジェル
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/gel
+- Retrieve a TileJSON response describing the Gel PMTiles source
+- Gel PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y}
+- Access individual map tiles for the Gel dataset
+- Gelデータセット用の個々のマップタイルにアクセス
 ## Technical Specifications / 技術仕様
 
 **All services provide / すべてのサービスが提供:**
@@ -98,7 +105,5 @@ x-24bは、エンタープライズグレードの信頼性とWebマッピング
 - Reliable for production use with enterprise-grade infrastructure
 - エンタープライズグレードのインフラで本番環境での使用に信頼性
 
----
-
-For more information, see [README.md](README.md), [SETUP.md](SETUP.md), [OPERATION.md](OPERATION.md), [NOTES.md](NOTES.md).
-詳細は [README.md](README.md)、[SETUP.md](SETUP.md)、[OPERATION.md](OPERATION.md)、[NOTES.md](NOTES.md) をご覧ください。
+Enjoy seamless and efficient tile hosting with x-24b!  
+x-24bでシームレスで効率的なタイルホスティングをお楽しみください！

@@ -42,7 +42,7 @@ tunnel:
 
 services:
 	@echo "Generating SERVICES.md from martin.yml..."
-	@python3 scripts/generate_services_md.py --output SERVICES.md
+	@ruby scripts/generate_services_md.rb --output SERVICES.md
 	@echo "SERVICES.md updated."
 
 monitor:

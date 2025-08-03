@@ -15,6 +15,14 @@ This document contains supplementary notes for the x-24b project, including deve
 
 ## Key Points / 主要なポイント
 
+### PMTiles Metadata Editing / PMTilesメタデータ編集
+- Use `pmtiles edit --header-json` to set tile_type, tile_compression, bounds, minzoom, maxzoom explicitly for each file.
+- 各ファイルの tile_type, tile_compression, bounds, minzoom, maxzoom を `pmtiles edit --header-json` で明示的に設定してください。
+- For WebP tiles, set tile_type: "webp", tile_compression: "none". Martin does not support gzip-compressed WebP tiles.
+- WebPタイルの場合は tile_type: "webp"、tile_compression: "none" を指定してください。Martinはgzip圧縮WebPタイルをサポートしません。
+- To host multiple PMTiles, list all files in the pmtiles.paths array in martin.yml.
+- 複数のPMTilesをホストするには、martin.yml の pmtiles.paths 配列にすべてのファイルを列挙してください。
+
 ### PMTiles Hosting / PMTilesホスティング
 - **Managed by Martin** - Dynamically serves tiles, sprites, and fonts
 - **Martinによる管理** - タイル、スプライト、フォントを動的に配信

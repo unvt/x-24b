@@ -77,6 +77,12 @@ This document describes the recommended steps to operate the x-24b system on Ras
 ---
 
 ## Notes / 注意事項
+- When hosting multiple PMTiles files, ensure each file's metadata (tile_type, tile_compression, bounds, minzoom, maxzoom) is set correctly for Martin/go-pmtiles compatibility.
+- 複数のPMTilesファイルをホストする場合、各ファイルのメタデータ（tile_type, tile_compression, bounds, minzoom, maxzoom）をMartin/go-pmtiles仕様に合わせて正しく設定してください。
+- For WebP tiles, set tile_type: "webp" and tile_compression: "none". Martin does not support gzip-compressed WebP tiles.
+- WebPタイルの場合は tile_type: "webp"、tile_compression: "none" を指定してください。Martinはgzip圧縮WebPタイルをサポートしません。
+- You can list multiple PMTiles files in martin.yml under pmtiles.paths to host them all at once.
+- martin.yml の pmtiles.paths 配列に複数ファイルを列挙することで、複数のPMTilesを同時にホストできます。
 - Always monitor system load with xload during operation.
 - 運用中は常にxloadでシステム負荷を監視してください。
 - Use tmux to keep services running independently and to easily recover sessions.
