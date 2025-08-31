@@ -73,6 +73,118 @@ https://tunnel.optgeo.org/martin/gel/{z}/{x}/{y}
 - ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
 - ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
 - ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### Terrain22 / 地形22
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/terrain22
+- Retrieve a TileJSON response describing the Terrain22 PMTiles source
+- Terrain22 PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/terrain22/{z}/{x}/{y}
+- Access individual map tiles for the Terrain22 dataset
+- Terrain22データセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### Addresses / 住所
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/addresses
+- Retrieve a TileJSON response describing the Addresses PMTiles source
+- Addresses PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/addresses/{z}/{x}/{y}
+- Access individual map tiles for the Addresses dataset
+- Addressesデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### base
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/base
+- Retrieve a TileJSON response describing the base PMTiles source
+- base PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/base/{z}/{x}/{y}
+- Access individual map tiles for the base dataset
+- baseデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### buildings
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/buildings
+- Retrieve a TileJSON response describing the buildings PMTiles source
+- buildings PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/buildings/{z}/{x}/{y}
+- Access individual map tiles for the buildings dataset
+- buildingsデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### divisions
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/divisions
+- Retrieve a TileJSON response describing the divisions PMTiles source
+- divisions PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/divisions/{z}/{x}/{y}
+- Access individual map tiles for the divisions dataset
+- divisionsデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### places
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/places
+- Retrieve a TileJSON response describing the places PMTiles source
+- places PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/places/{z}/{x}/{y}
+- Access individual map tiles for the places dataset
+- placesデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
+### transportation
+
+**TileJSON Endpoint / TileJSONエンドポイント:**  
+https://tunnel.optgeo.org/martin/transportation
+- Retrieve a TileJSON response describing the transportation PMTiles source
+- transportation PMTilesソースを記述するTileJSONレスポンスを取得
+
+**Tile Access / タイルアクセス:**  
+https://tunnel.optgeo.org/martin/transportation/{z}/{x}/{y}
+- Access individual map tiles for the transportation dataset
+- transportationデータセット用の個々のマップタイルにアクセス
+
+**Features / 機能:**
+- ✅ **HTTPS URLs** - Consistent HTTPS URL generation / 一貫したHTTPS URL生成
+- ✅ **CORS Support** - Full cross-origin request support / 完全なクロスオリジンリクエストサポート  
+- ✅ **Production Ready** - Enterprise-grade reliability / エンタープライズグレードの信頼性
 ## Future Services / 今後のサービス
 
 ### Gel / ジェル

@@ -6,8 +6,14 @@
 #https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles
 #    out=data/bvmap.pmtiles.part
 
-https://tile.openstreetmap.jp/static/planet.pmtiles
-    out=data/planet.pmtiles.part
+#https://tile.openstreetmap.jp/static/planet.pmtiles
+#   out=data/planet.pmtiles.part
+
+#https://data.source.coop/smartmaps/foil4gr1/terrain22.pmtiles
+#   out=data/terrain22.pmtiles.part
 
 #https://cndg-dgot.github.io/experimental-dili-beta/a.pmtiles
 #    out=data/experimental-dili-beta.pmtiles.part
+
+https://download.mapterhorn.com/planet.pmtiles
+    out=data/mapterhorn.pmtiles.part

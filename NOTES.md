@@ -33,9 +33,11 @@ This document contains supplementary notes for the x-24b project, including deve
 
 ### Makefile Tasks / Makefileタスク
 
-**`make download`** - Fetch PMTiles files / PMTilesファイルを取得
-- Uses `aria2c` for efficient batch downloading
-- 効率的なバッチダウンロードのため`aria2c`を使用
+**`make download`** - Fetch PMTiles files with parallel processing / 並列処理でPMTilesファイルを取得
+- Uses `aria2c` with `--max-concurrent-downloads=2` and `--split=2` for parallel downloads
+- 並列ダウンロードのため`aria2c`を`--max-concurrent-downloads=2`と`--split=2`で使用
+- Speed limited to 1MB/s (`--max-download-limit=1048576`) to be respectful to servers
+- サーバーに配慮して速度を1MB/s（`--max-download-limit=1048576`）に制限
 - Files downloaded with `.part` extension during transfer
 - 転送中は`.part`拡張子でファイルをダウンロード
 
@@ -49,17 +51,41 @@ This document contains supplementary notes for the x-24b project, including deve
 - Clears entire `data` directory
 - `data`ディレクトリ全体をクリア
 
-**`make host`** - Start Martin server / Martinサーバーを開始
-- Serves PMTiles files along with sprites and fonts
-- スプライトとフォントと共にPMTilesファイルを配信
+**`make martin`** - Start Martin server / Martinサーバーを開始
+- Serves both local and remote PMTiles files
+- ローカルとリモートの両方のPMTilesファイルを配信
+- Supports direct remote URL hosting without local storage
+- ローカルストレージなしでリモートURL直接ホスティングをサポート
 - Excludes partially downloaded files (`.part` files)
 - 部分的にダウンロードされたファイル（`.part`ファイル）を除外
+
+**`make services`** - Generate SERVICES.md from martin.yml / martin.ymlからSERVICES.mdを生成
+- Uses Ruby script `scripts/generate_services_md.rb`
+- Rubyスクリプト`scripts/generate_services_md.rb`を使用
+- Automatically lists all configured PMTiles sources
+- 設定されたすべてのPMTilesソースを自動的にリスト
+
+**`make monitor`** - Monitor service processes / サービスプロセスを監視
+- Uses `monitor.rb` to track martin, caddy, and cloudflared processes
+- `monitor.rb`を使用してmartin、caddy、cloudflaredプロセスを追跡
+- Shows real-time CPU usage, memory, I/O, and runtime statistics
+- リアルタイムCPU使用量、メモリ、I/O、実行時間統計を表示
+- Aggregates stats across all child processes for accurate monitoring
+- 正確な監視のため全子プロセスの統計を集約
 
 **`make tunnel`** - Establish Cloudflare Tunnel / Cloudflare Tunnelを確立
 - Configurable tunnel name via `tunnel_name` variable
 - `tunnel_name`変数による設定可能なトンネル名
 
 ## Technical Notes / 技術ノート
+
+### Remote PMTiles Support / リモートPMTilesサポート
+- **Direct URL hosting** - Martin can serve remote PMTiles URLs without local storage
+- **直接URL配信** - MartinはローカルストレージなしでリモートPMTiles URLを配信可能
+- **HTTP range requests** - Only fetches the specific tile data needed from remote sources
+- **HTTP範囲リクエスト** - リモートソースから必要な特定のタイルデータのみを取得
+- **Mixed sources** - Combine local files and remote URLs in the same martin.yml configuration
+- **混合ソース** - 同じmartin.yml設定でローカルファイルとリモートURLを組み合わせ
 
 ### CORS Implementation / CORS実装
 - **Problem**: Duplicate CORS headers when both Martin and Caddy add them

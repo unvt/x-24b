@@ -11,7 +11,7 @@ tunnel_name := gel-tunnel
 download:
 	@echo "Downloading PMTiles files as .part..."
 	@mkdir -p $(data_dir)
-	@aria2c --conditional-get=true --max-download-limit=1048576 -i $(urls_file)
+	@aria2c --conditional-get=true --max-download-limit=5242880 --max-concurrent-downloads=2 --split=2 -i $(urls_file)
 
 verify:
 	@echo "Verifying PMTiles files..."

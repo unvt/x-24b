@@ -17,14 +17,20 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 
 ## Features / 機能
 
-- **Multiple PMTiles hosting** - Hosts multiple PMTiles files listed in `urls.txt`
-- **複数PMTilesホスティング** - `urls.txt`にリストされた複数のPMTilesファイルをホスト
-- **Batch downloading** - Downloads PMTiles files using `aria2c` for efficient batch processing
-- **バッチダウンロード** - 効率的なバッチ処理のため`aria2c`を使用してPMTilesファイルをダウンロード
+- **Multiple PMTiles hosting** - Hosts multiple local and remote PMTiles files
+- **複数PMTilesホスティング** - 複数のローカル・リモートPMTilesファイルをホスト
+- **Remote PMTiles support** - Direct hosting of remote PMTiles URLs without local storage
+- **リモートPMTilesサポート** - ローカルストレージなしでリモートPMTiles URLを直接ホスト
+- **Parallel downloads** - Downloads PMTiles files using `aria2c` with multi-threading support
+- **並列ダウンロード** - マルチスレッド対応の`aria2c`を使用してPMTilesファイルをダウンロード
 - **File verification** - Validates downloaded PMTiles files using `pmtiles verify`
 - **ファイル検証** - `pmtiles verify`を使用してダウンロードしたPMTilesファイルを検証
+- **PMTiles metadata editing** - Fix incompatible headers using `pmtiles edit --header-json`
+- **PMTilesメタデータ編集** - `pmtiles edit --header-json`を使用して非互換ヘッダーを修正
 - **Makefile automation** - Controlled entirely via a `Makefile` with intuitive commands
 - **Makefile自動化** - 直感的なコマンドで`Makefile`により完全制御
+- **Real-time monitoring** - Process monitoring with `monitor.rb` for service health tracking
+- **リアルタイム監視** - サービス健全性追跡のための`monitor.rb`によるプロセス監視
 - **CORS support** - Full CORS compliance for web mapping applications
 - **CORSサポート** - Webマッピングアプリケーション向けの完全CORS準拠
 - **HTTPS consistency** - Reliable HTTPS URL generation through Cloudflare Tunnel
@@ -32,32 +38,46 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 
 ### Available Commands / 利用可能なコマンド
 
-- `make download` - Fetch PMTiles files / PMTilesファイルを取得
+- `make download` - Fetch PMTiles files with parallel downloads / 並列ダウンロードでPMTilesファイルを取得
 - `make verify` - Validate downloaded PMTiles files / ダウンロードしたPMTilesファイルを検証
 - `make clean` - Remove unnecessary files / 不要なファイルを削除
-- `make host` - Serve PMTiles files using Martin / Martinを使用してPMTilesファイルを配信
+- `make martin` - Start Martin server / Martinサーバーを開始
+- `make caddy` - Start Caddy server / Caddyサーバーを開始
 - `make tunnel` - Establish a Cloudflare Tunnel / Cloudflare Tunnelを確立
+- `make services` - Generate SERVICES.md from martin.yml / martin.ymlからSERVICES.mdを生成
+- `make monitor` - Monitor service processes / サービスプロセスを監視
 
 ## Usage / 使用方法
 
 > **Note:** All documentation uses English first, then Japanese for clarity and consistency.
 > **注:** すべてのドキュメントは英語→日本語の順で記載しています。
 
-1. **Populate `urls.txt`** with PMTiles file details:
-   **`urls.txt`にPMTilesファイルの詳細を記入**:
-   ```
-   https://server/directory/xyz.pmtiles
-       output=data/xyz.pmtiles
+1. **Configure PMTiles sources** in `martin.yml`:
+   **`martin.yml`でPMTilesソースを設定**:
+   ```yaml
+   pmtiles:
+     paths:
+       - data/local-file.pmtiles  # Local files
+       - https://example.com/remote.pmtiles  # Remote URLs
    ```
 
-2. **Use the `Makefile`** to manage the process:
+2. **Optional: Download files** listed in `urls.txt`:
+   **オプション: `urls.txt`にリストされたファイルをダウンロード**:
+   ```
+   https://server/directory/xyz.pmtiles
+       out=data/xyz.pmtiles.part
+   ```
+
+3. **Use the `Makefile`** to manage the process:
    **プロセス管理に`Makefile`を使用**:
    ```bash
-   make download   # Download files / ファイルをダウンロード
+   make download   # Download files with parallel processing / 並列処理でファイルをダウンロード
    make verify     # Verify integrity / 整合性を検証
    make martin     # Start Martin server / Martinサーバーを開始
    make caddy      # Start Caddy server / Caddyサーバーを開始
    make tunnel     # Start Cloudflare tunnel / Cloudflare tunnelを開始
+   make services   # Update services documentation / サービスドキュメントを更新
+   make monitor    # Monitor service processes / サービスプロセスを監視
    make clean      # Remove unnecessary files / 不要なファイルを削除
    ```
 
@@ -65,6 +85,8 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
    **tunnel経由でタイルにアクセス**:
    - TileJSON: `https://tunnel.optgeo.org/martin/[tileset-name]`
    - Tiles: `https://tunnel.optgeo.org/martin/[tileset-name]/{z}/{x}/{y}`
+   - Monitor: Run `make monitor` to track service health
+   - 監視: `make monitor`でサービス健全性を追跡
 
 ## Technical Architecture / 技術アーキテクチャ
 
@@ -84,6 +106,10 @@ Webブラウザ ←→ Cloudflare Tunnel ←→ Caddy (リバースプロキシ)
 - **集中CORS処理** によるヘッダー競合の防止
 - **Path-specific OPTIONS handling** for proper preflight support
 - **パス固有のOPTIONS処理** による適切なプリフライトサポート
+- **Remote PMTiles proxying** through Martin for seamless integration
+- **リモートPMTilesプロキシ** Martinによるシームレスな統合
+- **PMTiles metadata repair** for compatibility with Martin/go-pmtiles
+- **PMTilesメタデータ修復** Martin/go-pmtiles互換性のため
 
 For detailed technical documentation, see [`SETUP.md`](SETUP.md).
 詳細な技術ドキュメントについては、[`SETUP.md`](SETUP.md)をご覧ください。

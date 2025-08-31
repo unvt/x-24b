@@ -4,6 +4,13 @@ pmtiles:
     - data/bvmap.pmtiles
     - data/planet.pmtiles
     - data/gel.pmtiles
+    - data/terrain22.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/addresses.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/base.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/buildings.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/divisions.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/places.pmtiles
+    - https://dev.smellman.org/static/overture-2025-08-20/transportation.pmtiles
 web_ui: enable-for-all
 base_url: "https://tunnel.optgeo.org/martin"
 cors: false

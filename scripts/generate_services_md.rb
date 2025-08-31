@@ -20,6 +20,8 @@ service_names = {
   'bvmap' => 'BVMap / BVマップ',
   'planet' => 'Planet / プラネット',
   'gel' => 'Gel / ジェル',
+  'terrain22' => 'Terrain22 / 地形22',
+  'addresses' => 'Addresses / 住所',
 }
 
 header = <<~EOS

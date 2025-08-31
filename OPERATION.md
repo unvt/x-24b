@@ -74,15 +74,35 @@ This document describes the recommended steps to operate the x-24b system on Ras
   make tunnel
   ```
 
+### 7. Monitor Services (Optional) / サービス監視（オプション）
+- In a fourth tmux session, monitor service health:
+  ```bash
+  make monitor
+  ```
+- 4つ目のtmuxセッションでサービス健全性を監視：
+  ```bash
+  make monitor
+  ```
+
 ---
 
 ## Notes / 注意事項
+- Always monitor system load with xload during operation.
+- 運用中は常にxloadでシステム負荷を監視してください。
+- Use tmux to keep services running independently and to easily recover sessions.
+- tmuxを使うことで、サービスを独立して稼働させたり、セッションの復旧が容易になります。
+- Follow the order: martin → caddy → tunnel for reliable startup.
+- martin → caddy → tunnel の順で起動することで、安定したサービス開始が可能です。
 - When hosting multiple PMTiles files, ensure each file's metadata (tile_type, tile_compression, bounds, minzoom, maxzoom) is set correctly for Martin/go-pmtiles compatibility.
 - 複数のPMTilesファイルをホストする場合、各ファイルのメタデータ（tile_type, tile_compression, bounds, minzoom, maxzoom）をMartin/go-pmtiles仕様に合わせて正しく設定してください。
 - For WebP tiles, set tile_type: "webp" and tile_compression: "none". Martin does not support gzip-compressed WebP tiles.
 - WebPタイルの場合は tile_type: "webp"、tile_compression: "none" を指定してください。Martinはgzip圧縮WebPタイルをサポートしません。
 - You can list multiple PMTiles files in martin.yml under pmtiles.paths to host them all at once.
 - martin.yml の pmtiles.paths 配列に複数ファイルを列挙することで、複数のPMTilesを同時にホストできます。
+- Remote PMTiles URLs can be hosted directly without downloading - just add the HTTPS URL to martin.yml.
+- リモートPMTiles URLはダウンロードせずに直接ホスト可能 - martin.ymlにHTTPS URLを追加するだけです。
+- Use `make monitor` to track process health and resource usage in real-time.
+- `make monitor`でプロセス健全性とリソース使用量をリアルタイムで追跡できます。
 - Always monitor system load with xload during operation.
 - 運用中は常にxloadでシステム負荷を監視してください。
 - Use tmux to keep services running independently and to easily recover sessions.
@@ -118,6 +138,36 @@ This document describes the recommended steps to operate the x-24b system on Ras
 
 ### Q: How to update PMTiles files / PMTilesファイルの更新方法
 - Update `urls.txt` and rerun `make download` and `make verify`.
+- `urls.txt`を更新し、`make download`と`make verify`を再実行してください。
+
+### Q: How to fix PMTiles metadata errors / PMTilesメタデータエラーの修正方法
+- If Martin shows "Format Unknown and compression Unknown are not yet supported":
+- Martinが「Format Unknown and compression Unknown are not yet supported」を表示する場合：
+  1. Create a header.json file with correct metadata:
+     正しいメタデータでheader.jsonファイルを作成：
+     ```json
+     {
+       "tile_type": "webp",
+       "tile_compression": "none",
+       "bounds": [-180.0, -85.05112878, 180.0, 85.05112878],
+       "center": [0.0, 0.0, 2],
+       "minzoom": 2,
+       "maxzoom": 12
+     }
+     ```
+  2. Apply the fix: / 修正を適用：
+     ```bash
+     pmtiles edit data/filename.pmtiles --header-json header.json
+     ```
+
+### Q: How to add remote PMTiles / リモートPMTilesの追加方法
+- Add the HTTPS URL directly to martin.yml under pmtiles.paths:
+- martin.ymlのpmtiles.pathsにHTTPS URLを直接追加：
+  ```yaml
+  pmtiles:
+    paths:
+      - https://example.com/remote.pmtiles
+  ```
 - `urls.txt`を更新し、`make download`と`make verify`を再実行してください。
 
 ---
