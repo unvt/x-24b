@@ -132,6 +132,19 @@ This document describes the recommended steps to operate the x-24b system on Ras
   curl -I https://tunnel.optgeo.org/martin/[tileset-name]
   ```
 
+### Q: How to download very large PMTiles / 非常に大きなPMTilesのダウンロード方法
+- For PMTiles files over 100GB (like Mapterhorn planet.pmtiles):
+- 100GB以上のPMTilesファイル（Mapterhornのplanet.pmtilesなど）の場合：
+  ```bash
+  make download-mapterhorn
+  ```
+- This uses optimized aria2c settings with reduced concurrency (-x 4 -s 4) to avoid memory issues on Raspberry Pi.
+- これにより、Raspberry Piでのメモリ問題を回避するため、並列数を減らした最適化されたaria2c設定（-x 4 -s 4）が使用されます。
+- Download may take several days depending on your internet connection.
+- ダウンロードはインターネット接続によっては数日かかる場合があります。
+- Progress can be monitored in the terminal.
+- 進行状況はターミナルで監視できます。
+
 ### Q: How to restart a service / サービスの再起動方法
 - Stop the tmux session (Ctrl+C), then rerun the make command.
 - tmuxセッションを停止（Ctrl+C）し、再度makeコマンドを実行してください。

@@ -15,5 +15,9 @@
 #https://cndg-dgot.github.io/experimental-dili-beta/a.pmtiles
 #    out=data/experimental-dili-beta.pmtiles.part
 
+#https://z.yuiseki.net/static/planet.pmtiles
 https://download.mapterhorn.com/planet.pmtiles
     out=data/mapterhorn.pmtiles.part
+
+#https://build.protomaps.com/20250825.pmtiles
+#   out=data/protomaps-basemap.pmtiles.part

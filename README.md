@@ -39,6 +39,7 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 ### Available Commands / 利用可能なコマンド
 
 - `make download` - Fetch PMTiles files with parallel downloads / 並列ダウンロードでPMTilesファイルを取得
+- `make download-mapterhorn` - Download the large Mapterhorn PMTiles file with optimized settings / 最適化された設定で大きなMapterhornのPMTilesファイルをダウンロード
 - `make verify` - Validate downloaded PMTiles files / ダウンロードしたPMTilesファイルを検証
 - `make clean` - Remove unnecessary files / 不要なファイルを削除
 - `make martin` - Start Martin server / Martinサーバーを開始
@@ -72,6 +73,7 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
    **プロセス管理に`Makefile`を使用**:
    ```bash
    make download   # Download files with parallel processing / 並列処理でファイルをダウンロード
+   make download-mapterhorn # Download large Mapterhorn PMTiles (>300GB) / 大きなMapterhornのPMTiles（>300GB）をダウンロード
    make verify     # Verify integrity / 整合性を検証
    make martin     # Start Martin server / Martinサーバーを開始
    make caddy      # Start Caddy server / Caddyサーバーを開始

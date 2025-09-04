@@ -30,6 +30,8 @@ This document contains supplementary notes for the x-24b project, including deve
 - **CORS設定** - ヘッダー競合を防ぐためCaddyでのみ処理
 - **URL Generation** - Uses X-Rewrite-URL header for consistent HTTPS URLs
 - **URL生成** - 一貫したHTTPS URLのためX-Rewrite-URLヘッダーを使用
+- **Large Files** - For very large PMTiles (>100GB), use aria2c with reduced concurrency (e.g., -x 4 -s 4)
+- **大容量ファイル** - 非常に大きなPMTiles（>100GB）の場合、並列数を減らしたaria2c（例：-x 4 -s 4）を使用
 
 ### Makefile Tasks / Makefileタスク
 

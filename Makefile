@@ -11,7 +11,7 @@ tunnel_name := gel-tunnel
 download:
 	@echo "Downloading PMTiles files as .part..."
 	@mkdir -p $(data_dir)
-	@aria2c --conditional-get=true --max-download-limit=5242880 --max-concurrent-downloads=2 --split=2 -i $(urls_file)
+	@aria2c --conditional-get=true --max-download-limit=5242880 --max-concurrent-downloads=2 --split=2 --max-tries=10 --retry-wait=5 -i $(urls_file)
 
 verify:
 	@echo "Verifying PMTiles files..."
@@ -48,4 +48,9 @@ services:
 monitor:
 	ruby monitor.rb
 
-.PHONY: download verify clean martin tunnel caddy services monitor
+download-mapterhorn:
+	@echo "Downloading Mapterhorn PMTiles (large file)..."
+	@mkdir -p $(data_dir)
+	@cd $(data_dir) && aria2c -x 4 -s 4 --file-allocation=none --console-log-level=notice "https://download.mapterhorn.com/planet.pmtiles" -o mapterhorn.pmtiles
+
+.PHONY: download verify clean martin tunnel caddy services monitor download-mapterhorn
