@@ -29,15 +29,28 @@ clean:
 	@rm -rf $(data_dir)
 
 martin:
-	RUST_LOG=debug martin --config martin.yml
+	@echo "Starting Martin server (quiet mode)..."
+	@martin --config martin.yml
+
+martin-debug:
+	@echo "Starting Martin server (debug mode)..."
+	@RUST_LOG=debug martin --config martin.yml
 
 caddy:
-	@echo "Starting Caddy server..."
+	@echo "Starting Caddy server (quiet mode)..."
+	@caddy run --config Caddyfile --adapter caddyfile 2>/dev/null
+
+caddy-debug:
+	@echo "Starting Caddy server (debug mode)..."
 	@caddy run --config Caddyfile
 
 # Tunnel setup
 tunnel:
-	@echo "Setting up Cloudflare Tunnel..."
+	@echo "Setting up Cloudflare Tunnel (quiet mode)..."
+	@cloudflared tunnel run $(tunnel_name) 2>/dev/null
+
+tunnel-debug:
+	@echo "Setting up Cloudflare Tunnel (debug mode)..."
 	@cloudflared tunnel run $(tunnel_name)
 
 services:
@@ -53,4 +66,4 @@ download-mapterhorn:
 	@mkdir -p $(data_dir)
 	@cd $(data_dir) && aria2c -x 4 -s 4 --file-allocation=none --console-log-level=notice "https://download.mapterhorn.com/planet.pmtiles" -o mapterhorn.pmtiles
 
-.PHONY: download verify clean martin tunnel caddy services monitor download-mapterhorn
+.PHONY: download verify clean martin martin-debug caddy caddy-debug tunnel tunnel-debug services monitor download-mapterhorn

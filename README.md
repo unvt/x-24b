@@ -42,9 +42,12 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 - `make download-mapterhorn` - Download the large Mapterhorn PMTiles file with optimized settings / 最適化された設定で大きなMapterhornのPMTilesファイルをダウンロード
 - `make verify` - Validate downloaded PMTiles files / ダウンロードしたPMTilesファイルを検証
 - `make clean` - Remove unnecessary files / 不要なファイルを削除
-- `make martin` - Start Martin server / Martinサーバーを開始
-- `make caddy` - Start Caddy server / Caddyサーバーを開始
-- `make tunnel` - Establish a Cloudflare Tunnel / Cloudflare Tunnelを確立
+- `make martin` - Start Martin server in quiet mode / 静かなモードでMartinサーバーを開始
+- `make martin-debug` - Start Martin server with verbose logging / 詳細なログ付きでMartinサーバーを開始
+- `make caddy` - Start Caddy server in quiet mode / 静かなモードでCaddyサーバーを開始
+- `make caddy-debug` - Start Caddy server with verbose logging / 詳細なログ付きでCaddyサーバーを開始
+- `make tunnel` - Establish a Cloudflare Tunnel in quiet mode / 静かなモードでCloudflare Tunnelを確立
+- `make tunnel-debug` - Establish a Cloudflare Tunnel with verbose logging / 詳細なログ付きでCloudflare Tunnelを確立
 - `make services` - Generate SERVICES.md from martin.yml / martin.ymlからSERVICES.mdを生成
 - `make monitor` - Monitor service processes / サービスプロセスを監視
 
@@ -72,12 +75,22 @@ The name "x-24b" is a playful nod to the Martin tile server and its connection t
 3. **Use the `Makefile`** to manage the process:
    **プロセス管理に`Makefile`を使用**:
    ```bash
+   # Download and verify
    make download   # Download files with parallel processing / 並列処理でファイルをダウンロード
    make download-mapterhorn # Download large Mapterhorn PMTiles (>300GB) / 大きなMapterhornのPMTiles（>300GB）をダウンロード
    make verify     # Verify integrity / 整合性を検証
-   make martin     # Start Martin server / Martinサーバーを開始
-   make caddy      # Start Caddy server / Caddyサーバーを開始
-   make tunnel     # Start Cloudflare tunnel / Cloudflare tunnelを開始
+   
+   # Quiet operation (default for stable systems)
+   make martin     # Start Martin server in quiet mode / 静かなモードでMartinサーバーを開始
+   make caddy      # Start Caddy server in quiet mode / 静かなモードでCaddyサーバーを開始
+   make tunnel     # Start Cloudflare tunnel in quiet mode / 静かなモードでCloudflare tunnelを開始
+   
+   # Debug operation (for troubleshooting)
+   make martin-debug  # Start Martin with verbose logging / 詳細ログ付きでMartinを開始
+   make caddy-debug   # Start Caddy with verbose logging / 詳細ログ付きでCaddyを開始
+   make tunnel-debug  # Start Cloudflare tunnel with verbose logging / 詳細ログ付きでtunnelを開始
+   
+   # Utilities
    make services   # Update services documentation / サービスドキュメントを更新
    make monitor    # Monitor service processes / サービスプロセスを監視
    make clean      # Remove unnecessary files / 不要なファイルを削除

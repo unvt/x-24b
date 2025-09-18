@@ -53,13 +53,39 @@ This document contains supplementary notes for the x-24b project, including deve
 - Clears entire `data` directory
 - `data`ディレクトリ全体をクリア
 
-**`make martin`** - Start Martin server / Martinサーバーを開始
-- Serves both local and remote PMTiles files
-- ローカルとリモートの両方のPMTilesファイルを配信
+**`make martin`** - Start Martin server in quiet mode / 静かなモードでMartinサーバーを開始
+- Serves both local and remote PMTiles files without verbose logging
+- 詳細なログなしでローカルとリモートの両方のPMTilesファイルを配信
 - Supports direct remote URL hosting without local storage
 - ローカルストレージなしでリモートURL直接ホスティングをサポート
 - Excludes partially downloaded files (`.part` files)
 - 部分的にダウンロードされたファイル（`.part`ファイル）を除外
+
+**`make martin-debug`** - Start Martin server in debug mode / デバッグモードでMartinサーバーを開始
+- Includes detailed logging with RUST_LOG=debug
+- RUST_LOG=debugで詳細なログを含む
+- Useful for troubleshooting issues with PMTiles files or service
+- PMTilesファイルやサービスの問題をトラブルシューティングするのに役立つ
+
+**`make caddy`** - Start Caddy server in quiet mode / 静かなモードでCaddyサーバーを開始
+- Runs Caddy with minimal output, redirecting stderr to /dev/null
+- 最小限の出力でCaddyを実行し、標準エラーを/dev/nullにリダイレクト
+- More efficient for stable production environments
+- 安定した本番環境ではより効率的
+
+**`make caddy-debug`** - Start Caddy server in debug mode / デバッグモードでCaddyサーバーを開始
+- Shows all Caddy logs for diagnostics
+- 診断のためにすべてのCaddyログを表示
+
+**`make tunnel`** - Start Cloudflare Tunnel in quiet mode / 静かなモードでCloudflare Tunnelを開始
+- Runs cloudflared with minimal output, redirecting stderr to /dev/null
+- 最小限の出力でcloudflaredを実行し、標準エラーを/dev/nullにリダイレクト
+- Recommended for normal operation
+- 通常運用に推奨
+
+**`make tunnel-debug`** - Start Cloudflare Tunnel in debug mode / デバッグモードでCloudflare Tunnelを開始
+- Shows all tunnel connection and routing logs
+- すべてのトンネル接続とルーティングログを表示
 
 **`make services`** - Generate SERVICES.md from martin.yml / martin.ymlからSERVICES.mdを生成
 - Uses Ruby script `scripts/generate_services_md.rb`

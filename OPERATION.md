@@ -49,29 +49,45 @@ This document describes the recommended steps to operate the x-24b system on Ras
   ```
 
 ### 6. Start Services in Order / サービスを順番に起動
-- In the first tmux session, start Martin:
+
+#### Normal Operation (Quiet Mode) / 通常運用（静かなモード）
+- In the first tmux session, start Martin in quiet mode:
   ```bash
   make martin
   ```
-- 1つ目のtmuxセッションでMartinを起動：
+- 1つ目のtmuxセッションで静かなモードでMartinを起動：
   ```bash
   make martin
   ```
-- In the second tmux session, start Caddy:
+- In the second tmux session, start Caddy in quiet mode:
   ```bash
   make caddy
   ```
-- 2つ目のtmuxセッションでCaddyを起動：
+- 2つ目のtmuxセッションで静かなモードでCaddyを起動：
   ```bash
   make caddy
   ```
-- In the third tmux session, start the Cloudflare Tunnel:
+- In the third tmux session, start the Cloudflare Tunnel in quiet mode:
   ```bash
   make tunnel
   ```
-- 3つ目のtmuxセッションでCloudflare Tunnelを起動：
+- 3つ目のtmuxセッションで静かなモードでCloudflare Tunnelを起動：
   ```bash
   make tunnel
+  ```
+
+#### Troubleshooting (Debug Mode) / トラブルシューティング（デバッグモード）
+- For detailed logs when troubleshooting issues, use the debug versions:
+  ```bash
+  make martin-debug
+  make caddy-debug
+  make tunnel-debug
+  ```
+- 問題のトラブルシューティング時に詳細なログを表示するには、デバッグバージョンを使用します：
+  ```bash
+  make martin-debug
+  make caddy-debug
+  make tunnel-debug
   ```
 
 ### 7. Monitor Services (Optional) / サービス監視（オプション）
@@ -117,6 +133,18 @@ This document describes the recommended steps to operate the x-24b system on Ras
 ### Q: Service does not start or shows error / サービスが起動しない・エラーが表示される
 - Check if all dependencies (Martin, Caddy, Cloudflare Tunnel, tmux, x11-utils) are installed.
 - すべての依存パッケージ（Martin, Caddy, Cloudflare Tunnel, tmux, x11-utils）がインストールされているか確認してください。
+- Use debug mode to see detailed error messages:
+  ```bash
+  make martin-debug
+  make caddy-debug
+  make tunnel-debug
+  ```
+- デバッグモードを使用して詳細なエラーメッセージを確認：
+  ```bash
+  make martin-debug
+  make caddy-debug
+  make tunnel-debug
+  ```
 - Review logs in each tmux session for error messages.
 - 各tmuxセッションのログでエラーメッセージを確認してください。
 
