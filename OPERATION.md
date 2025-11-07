@@ -51,11 +51,11 @@ This document describes the recommended steps to operate the x-24b system on Ras
 ### 6. Start Services in Order / サービスを順番に起動
 
 #### Normal Operation (Quiet Mode) / 通常運用（静かなモード）
-- In the first tmux session, start Martin in quiet mode:
+- In the first tmux session, start Martin with automatic daily restart at 2AM JST:
   ```bash
   make martin
   ```
-- 1つ目のtmuxセッションで静かなモードでMartinを起動：
+- 1つ目のtmuxセッションで日本時間午前2時に自動再起動するMartinを起動：
   ```bash
   make martin
   ```
@@ -103,6 +103,8 @@ This document describes the recommended steps to operate the x-24b system on Ras
 ---
 
 ## Notes / 注意事項
+- The Martin server automatically restarts at 2AM JST daily to refresh online PMTiles references. No manual intervention is required.
+- Martinサーバーは、オンラインPMTiles参照を更新するため、日本時間午前2時に毎日自動的に再起動します。手動の操作は不要です。
 - Always monitor system load with xload during operation.
 - 運用中は常にxloadでシステム負荷を監視してください。
 - Use tmux to keep services running independently and to easily recover sessions.
@@ -119,12 +121,6 @@ This document describes the recommended steps to operate the x-24b system on Ras
 - リモートPMTiles URLはダウンロードせずに直接ホスト可能 - martin.ymlにHTTPS URLを追加するだけです。
 - Use `make monitor` to track process health and resource usage in real-time.
 - `make monitor`でプロセス健全性とリソース使用量をリアルタイムで追跡できます。
-- Always monitor system load with xload during operation.
-- 運用中は常にxloadでシステム負荷を監視してください。
-- Use tmux to keep services running independently and to easily recover sessions.
-- tmuxを使うことで、サービスを独立して稼働させたり、セッションの復旧が容易になります。
-- Follow the order: martin → caddy → tunnel for reliable startup.
-- martin → caddy → tunnel の順で起動することで、安定したサービス開始が可能です。
 
 ---
 
