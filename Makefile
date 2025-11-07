@@ -29,8 +29,25 @@ clean:
 	@rm -rf $(data_dir)
 
 martin:
-	@echo "Starting Martin server (quiet mode)..."
-	@martin --config martin.yml
+	@echo "Starting Martin server with daily 2AM JST restart..."
+	@while true; do \
+		martin --config martin.yml & \
+		MARTIN_PID=$$!; \
+		NOW_JST=$$(TZ=Asia/Tokyo date +%s); \
+		TODAY_2AM=$$(TZ=Asia/Tokyo date -d "today 02:00:00" +%s 2>/dev/null || echo 0); \
+		TOMORROW_2AM=$$(TZ=Asia/Tokyo date -d "tomorrow 02:00:00" +%s 2>/dev/null || echo $$(($$NOW_JST + 86400))); \
+		if [ $$TODAY_2AM -gt $$NOW_JST ]; then \
+			SLEEP_SEC=$$(($$TODAY_2AM - $$NOW_JST)); \
+		else \
+			SLEEP_SEC=$$(($$TOMORROW_2AM - $$NOW_JST)); \
+		fi; \
+		echo "Martin started (PID: $$MARTIN_PID). Next restart in $$(($$SLEEP_SEC / 3600)) hours."; \
+		sleep $$SLEEP_SEC; \
+		echo "Restarting Martin at 2AM JST..."; \
+		kill $$MARTIN_PID 2>/dev/null || true; \
+		wait $$MARTIN_PID 2>/dev/null || true; \
+		sleep 2; \
+	done
 
 martin-debug:
 	@echo "Starting Martin server (debug mode)..."
