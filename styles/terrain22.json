@@ -1,0 +1,77 @@
+{
+  "version": 8,
+  "sources": {
+    "terrain22": {
+      "type": "vector",
+      "url": "https://tunnel.optgeo.org/martin/terrain22",
+      "attribution": "<a href='https://gisstar.gsi.go.jp/terrain2021/'>Terrain22</a>",
+      "minzoom": 9,
+      "maxzoom": 13
+    }
+  },
+  "sprite": "https://openmaptiles.github.io/positron-gl-style/sprite",
+  "glyphs": "https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "terrain22",
+      "type": "fill",
+      "source": "terrain22",
+      "source-layer": "terrain22",
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "terrain22"
+          ],
+          1,
+          "rgb(112, 79, 41)",
+          2,
+          "rgb(172, 82, 50)",
+          3,
+          "rgb(153, 131, 83)",
+          4,
+          "rgb(251, 154, 153)",
+          5,
+          "rgb(248, 3, 204)",
+          6,
+          "rgb(243, 162, 243)",
+          7,
+          "rgb(145, 150, 185)",
+          8,
+          "rgb(40, 135, 108)",
+          9,
+          "rgb(20, 172, 132)",
+          10,
+          "rgb(31, 195, 105)",
+          11,
+          "rgb(223, 134, 31)",
+          12,
+          "rgb(30, 218, 74)",
+          13,
+          "rgb(125, 162, 143)",
+          14,
+          "rgb(155, 151, 169)",
+          15,
+          "rgb(251, 147, 0)",
+          16,
+          "rgb(122, 236, 50)",
+          17,
+          "rgb(249, 180, 4)",
+          18,
+          "rgb(194, 251, 71)",
+          19,
+          "rgb(251, 216, 15)",
+          20,
+          "rgb(154, 255, 255)",
+          21,
+          "rgb(253, 253, 120)",
+          22,
+          "rgb(0, 183, 255)",
+          "rgb(100, 100, 100)"
+        ]
+      },
+      "maxzoom": 22
+    }
+  ]
+}

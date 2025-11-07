@@ -1,20 +1,26 @@
 pmtiles: 
   sources:
     mapterhorn: https://download.mapterhorn.com/planet.pmtiles
+#    mapterhorn-local: /home/pod/x-24b/data/mapterhorn.pmtiles
     experimental-dili-beta: data/experimental-dili-beta.pmtiles
     bvmap: data/bvmap.pmtiles
     planet: data/planet.pmtiles
     gel: data/gel.pmtiles
     terrain22: data/terrain22.pmtiles
+    terrain2225: data/terrain2225.pmtiles
+    planet_bmng: data/planet_bmng.pmtiles
     HOT-Jamata-Cockle-Bay-Freetown: data/HOT-Jamata-Cockle-Bay-Freetown.pmtiles
     protomaps-basemap: data/protomaps-basemap.pmtiles
     maxar-2020-freetown: data/maxar-2020-freetown.pmtiles
-    addresses: https://dev.smellman.org/static/overture-2025-08-20/addresses.pmtiles
-    base: https://dev.smellman.org/static/overture-2025-08-20/base.pmtiles
-    buildings: https://dev.smellman.org/static/overture-2025-08-20/buildings.pmtiles
-    divisions: https://dev.smellman.org/static/overture-2025-08-20/divisions.pmtiles
-    places: https://dev.smellman.org/static/overture-2025-08-20/places.pmtiles
-    transportation: https://dev.smellman.org/static/overture-2025-08-20/transportation.pmtiles
+    addresses: https://dev.smellman.org/static/overture-latest/addresses.pmtiles
+    base: https://dev.smellman.org/static/overture-latest/base.pmtiles
+    buildings: https://dev.smellman.org/static/overture-latest/buildings.pmtiles
+    divisions: https://dev.smellman.org/static/overture-latest/divisions.pmtiles
+    places: https://dev.smellman.org/static/overture-latest/places.pmtiles
+    transportation: https://dev.smellman.org/static/overture-latest/transportation.pmtiles
 web_ui: enable-for-all
 base_url: "https://tunnel.optgeo.org/martin"
 cors: false
+styles:
+  sources:
+    terrain22: styles/terrain22.json

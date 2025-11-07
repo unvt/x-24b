@@ -21,3 +21,7 @@ https://download.mapterhorn.com/planet.pmtiles
 
 #https://build.protomaps.com/20250825.pmtiles
 #   out=data/protomaps-basemap.pmtiles.part
+
+#https://z.yuiseki.net/static/planetarble/planet_bmng.pmtiles
+#    out=data/planet_bmng.pmtiles
+

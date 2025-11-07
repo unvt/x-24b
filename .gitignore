@@ -8,9 +8,28 @@
 *.log
 
 # Ignore system files
+# Ignore large data directory and PMTiles artifacts
+data/
+*.pmtiles
+*.pmtiles.part
+*.pmtiles.part.aria2
+*.pmtiles.incomplete
+*.aria2
+*.part
+*.incomplete
+
+# Ignore temporary and log files
+*.tmp
+*.log
+*.pid
+
+# Ignore system files
 .DS_Store
 Thumbs.db
 
-# Ignore IDE files
+# Ignore editor/IDE files
 .vscode/
 .idea/
+
+# Ignore build/runtime directories
+/tmp/
