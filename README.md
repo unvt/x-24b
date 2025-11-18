@@ -114,6 +114,42 @@ Web Browser ←→ Cloudflare Tunnel ←→ Caddy (Reverse Proxy) ←→ Martin 
 Webブラウザ ←→ Cloudflare Tunnel ←→ Caddy (リバースプロキシ) ←→ Martin (PMTilesサーバー)
 ```
 
+### Data Flow Diagram / データフロー図
+
+```mermaid
+flowchart LR
+  subgraph Origin["Origin / Host"]
+    PM[(PMTiles<br>.pmtiles)]
+    Martin[Martin<br>tile server]
+    Static[Static web<br>content]
+  end
+
+  Caddy[Caddy<br>CORS · headers · routing<br>file_server / reverse_proxy]
+  Cloudflared[cloudflared<br>tunnel / ingress]
+  Internet([Internet<br>Clients])
+
+  %% Primary tile flow via Martin
+  PM -->|tile request| Martin
+  Martin -->|proxied tiles| Caddy
+
+  %% Alternate direct static access to PMTiles
+  PM -.->|direct .pmtiles<br>access| Caddy
+
+  %% Caddy serves static web content
+  Static -->|static files| Caddy
+
+  %% Outbound to Internet through cloudflared
+  Caddy -->|ingress target| Cloudflared
+  Cloudflared -->|tunnel| Internet
+```
+
+**Diagram Notes / 図の補足:**
+- **Caddy**: `reverse_proxy` → Martin for `/martin/*` routes / `/martin/*` ルートは Martin へリバースプロキシ
+- **Caddy**: `file_server` serves static and `.pmtiles` directly (e.g., `/data/*.pmtiles`) / 静的ファイルと `.pmtiles` を直接配信（例: `/data/*.pmtiles`）
+- PMTiles files in `./data` directory can be accessed directly or via Martin / `./data` ディレクトリ内の PMTiles ファイルは直接アクセスまたは Martin 経由でアクセス可能
+- CORS, HTTPS, and OPTIONS handling centralized in Caddy / CORS、HTTPS、OPTIONS の処理は Caddy で一元化
+- Internet access via cloudflared tunnel / cloudflared トンネル経由でインターネットアクセス
+
 **Key innovations / 主要な革新:**
 - **X-Rewrite-URL header** for consistent HTTPS URL generation
 - **X-Rewrite-URLヘッダー** による一貫したHTTPS URL生成
